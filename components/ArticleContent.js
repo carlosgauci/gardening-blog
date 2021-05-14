@@ -1,6 +1,7 @@
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
 import Image from "next/image";
+import RelatedArticles from "../components/RelatedArticles";
 
 export default function ArticleContent({ article, relatedArticles }) {
   const { title, articleContent, authorName, authorImage } = article.fields;
@@ -45,6 +46,9 @@ export default function ArticleContent({ article, relatedArticles }) {
       <section className="pb-4 mb-8 border-b border-gray-200">
         {documentToReactComponents(articleContent, renderOptions)}
       </section>
+
+      {/* Related articles */}
+      <RelatedArticles articles={relatedArticles} />
     </article>
   );
 }

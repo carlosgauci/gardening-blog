@@ -5,7 +5,7 @@ import ArticleCard from "./ArticleCard";
 import { BiChevronRight } from "react-icons/bi";
 import Link from "next/link";
 
-export default function ArticleSlider({ name, articles }) {
+export default function ArticleSlider({ name, articles, related }) {
   const [sliderRef, slider] = useKeenSlider({
     slidesPerView: 1.2,
     spacing: 15,
@@ -58,7 +58,10 @@ export default function ArticleSlider({ name, articles }) {
       )}
 
       {/* Slider */}
-      <div ref={sliderRef} className="keen-slider relative pl-4 md:pl-16">
+      <div
+        ref={sliderRef}
+        className={`keen-slider relative ${!related && "pl-4 md:pl-16"}`}
+      >
         {articles.map((article) => (
           <ArticleCard key={article.sys.id} article={article} slider={true} />
         ))}
