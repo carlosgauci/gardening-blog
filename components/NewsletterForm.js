@@ -37,7 +37,7 @@ export default function NewsletterForm({ index }) {
           <input
             type="email"
             placeholder="your email"
-            className={`mb-3 rounded-sm px-2 text-gray-900 font-body font-semibold ${
+            className={`mb-3 rounded-sm px-2 text-gray-900 font-body  ${
               index ? "h-10 w-72" : "h-8"
             }`}
             value={email}
@@ -47,7 +47,7 @@ export default function NewsletterForm({ index }) {
           {/* Submit / subscribe button */}
           <button
             type="submit"
-            className={`bg-gray-900 text-white rounded-sm ${
+            className={`bg-gray-900 text-white rounded-sm font-semibold tracking-wider ${
               index ? "bg-gray-900 h-10" : "bg-green-600 h-8"
             }`}
             disabled={state === "LOADING"}

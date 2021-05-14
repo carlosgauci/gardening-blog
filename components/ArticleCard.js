@@ -22,7 +22,7 @@ export default function ArticleCard({ article, slider, featured }) {
           />
 
           {/* Title */}
-          <h3 className="text-white text-xl text-shadow capitalize relative">
+          <h3 className="text-white text-xl text-shadow capitalize relative tracking-wide font-bold">
             {title}
           </h3>
         </a>
