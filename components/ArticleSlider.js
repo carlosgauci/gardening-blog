@@ -49,8 +49,10 @@ export default function ArticleSlider({ name, articles, related }) {
           <Link href={`/${category}`}>
             <a className="ml-0 md:ml-6">
               <div className="flex items-center  text-green-500 font-bold">
-                <p className="font-heading text-sm mb-0">view all</p>
-                <BiChevronRight />
+                <p className="font-heading text-sm mb-0 flex-shrink-0">
+                  view all
+                </p>
+                <BiChevronRight className="flex-shrink-0" />
               </div>
             </a>
           </Link>

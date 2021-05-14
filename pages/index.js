@@ -17,23 +17,27 @@ export async function getStaticProps() {
     client.getEntries({
       content_type: "gardeningArticles",
       limit: 5,
+      order: "-sys.createdAt",
       "fields.featured": true,
     }),
     client.getEntries({
       content_type: "gardeningArticles",
       limit: 7,
+      order: "-sys.createdAt",
       "fields.category": "gardening",
       "fields.featured": false,
     }),
     client.getEntries({
       content_type: "gardeningArticles",
       limit: 7,
+      order: "-sys.createdAt",
       "fields.category": "farming",
       "fields.featured": false,
     }),
     client.getEntries({
       content_type: "gardeningArticles",
       limit: 7,
+      order: "-sys.createdAt",
       "fields.category": "animal-husbandry",
       "fields.featured": false,
     }),

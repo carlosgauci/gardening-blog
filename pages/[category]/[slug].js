@@ -35,8 +35,9 @@ export async function getStaticProps({ params }) {
     }),
     client.getEntries({
       content_type: "gardeningArticles",
-      "fields.category": params.category,
+      order: "-sys.createdAt",
       limit: 7,
+      "fields.category": params.category,
     }),
     client.getEntries({
       content_type: "gardeningCategories",
