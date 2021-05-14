@@ -4,7 +4,11 @@ export default function Navigation({ setNavOpen, categories }) {
   return (
     <nav className="fixed inset-0">
       <div className="absolute -inset-y-0 right-0 w-full md:w-96 bg-white">
-        <NavLinks categories={categories} setNavOpen={setNavOpen} />
+        <NavLinks
+          categories={categories}
+          setNavOpen={setNavOpen}
+          mainNav={true}
+        />
       </div>
 
       {/* underlay */}

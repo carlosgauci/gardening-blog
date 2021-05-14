@@ -5,8 +5,9 @@ import {
   FaPinterest,
 } from "react-icons/fa";
 import NewsletterForm from "./NewsletterForm";
+import NavLinks from "./NavLinks";
 
-export default function Sidebar() {
+export default function Sidebar({ categories }) {
   return (
     <aside className="w-full md:w-1/3 lg:w-1/4  pl-4 pr-4 xl:pr-0 self-start md:sticky md:top-0">
       {/* Mailing list */}
@@ -32,11 +33,9 @@ export default function Sidebar() {
       {/* Categories */}
       <section className="border border-gray-300 rounded px-4 py-8 mb-8 text-center ">
         <h4 className="uppercase tracking-widest font-bold mb-5">Categories</h4>
-        <div className="flex flex-col justify-center">
-          <p>Animal Husbandry</p>
-          <p>Farming</p>
-          <p>Gardening</p>
-        </div>
+        <nav className="flex flex-col justify-center">
+          <NavLinks categories={categories} sidebar={true} />
+        </nav>
       </section>
     </aside>
   );

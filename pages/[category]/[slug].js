@@ -26,9 +26,9 @@ export async function getStaticPaths() {
   };
 }
 
-// Get single article and related articles from contentful
+// Get single article, related articles and categories from contentful
 export async function getStaticProps({ params }) {
-  const [article, relatedArticles] = await Promise.all([
+  const [article, relatedArticles, categories] = await Promise.all([
     client.getEntries({
       content_type: "gardeningArticles",
       "fields.slug": params.slug,
@@ -37,6 +37,9 @@ export async function getStaticProps({ params }) {
       content_type: "gardeningArticles",
       "fields.category": params.category,
       limit: 7,
+    }),
+    client.getEntries({
+      content_type: "gardeningCategories",
     }),
   ]);
 
@@ -50,12 +53,13 @@ export async function getStaticProps({ params }) {
     props: {
       article: article.items[0],
       relatedArticles: filteredArticles,
+      categories: categories.items,
     },
     revalidate: 120,
   };
 }
 
-export default function PostPage({ article, relatedArticles }) {
+export default function PostPage({ article, relatedArticles, categories }) {
   const { image, title } = article.fields;
   return (
     <div className="pt-14 md:pt-20 xl:container xl:max-w-7xl">
@@ -69,12 +73,12 @@ export default function PostPage({ article, relatedArticles }) {
           alt={title}
         />
       </section>
-
+      {console.log(categories)}
       <section className="md:flex relative">
         {/* Article content */}
         <ArticleContent article={article} relatedArticles={relatedArticles} />
 
-        <Sidebar />
+        <Sidebar categories={categories} />
       </section>
     </div>
   );

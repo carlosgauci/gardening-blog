@@ -25,28 +25,34 @@ export async function getStaticPaths() {
   };
 }
 
+// Get articles for category from contentful
 export async function getStaticProps({ params }) {
-  const [articles, category] = await Promise.all([
+  const [articles, categories] = await Promise.all([
     client.getEntries({
       content_type: "gardeningArticles",
       "fields.category": params.category,
     }),
     client.getEntries({
       content_type: "gardeningCategories",
-      "fields.slug": params.category,
     }),
   ]);
+
+  // Filter this category from category list
+  const thisCategory = categories.items.filter(
+    (cat) => cat.fields.slug === params.category
+  );
 
   return {
     props: {
       articles: articles.items,
-      category: category.items,
+      category: thisCategory,
+      categories: categories.items,
     },
     revalidate: 120,
   };
 }
 
-export default function Category({ articles, category }) {
+export default function Category({ articles, category, categories }) {
   const {
     categoryImage: {
       fields: {
@@ -83,7 +89,7 @@ export default function Category({ articles, category }) {
         {/* Category content */}
         <CategoryPage category={category} articles={articles} />
 
-        <Sidebar />
+        <Sidebar categories={categories} />
       </section>
     </div>
   );

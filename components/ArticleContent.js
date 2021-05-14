@@ -14,11 +14,11 @@ export default function ArticleContent({ article, relatedArticles }) {
 
   return (
     <article className="w-full md:w-2/3 lg:w-3/4 px-4 xl:pl-0 xl:pr-8">
-      <section>
+      <section className="mb-4">
         {/* Article title */}
         <h2 className="capitalize text-2xl font-bold mb-4">{title}</h2>
 
-        <div className="flex items-center mb-8 font-semibold text-sm">
+        <div className="flex items-center font-semibold text-sm">
           {/* Author image (if it exists) */}
           {authorImage && (
             <div className="relative rounded-full h-8 w-8 overflow-hidden mr-2">
