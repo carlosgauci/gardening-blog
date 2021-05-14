@@ -19,7 +19,7 @@ const contentfulQuery = async (query, variables) => {
 
 const CATEGORY_QUERY = `
      query myQuery {
-        sexEdCategoriesCollection {
+        gardeningCategoriesCollection {
             items {
                 name
                 slug
@@ -37,5 +37,5 @@ export default async (req, res) => {
     });
   }
 
-  return res.status(200).json(data.sexEdCategoriesCollection.items);
+  return res.status(200).json(data.gardeningCategoriesCollection.items);
 };
