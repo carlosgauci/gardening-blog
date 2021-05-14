@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/algolia.css";
 
 import Layout from "../components/Layout";
 
