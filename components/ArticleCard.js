@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ArticleCard({ article }) {
+export default function ArticleCard({ article, slider, featured }) {
   const { title, image, slug, articleText, category } = article.fields;
   return (
     <article
-      className={`relative bg-black px-2 py-1 rounded shadow overflow-hidden h-full`}
+      className={`relative bg-black px-2 py-1 rounded shadow overflow-hidden ${
+        featured ? "h-full" : "h-60"
+      } ${slider ? "keen-slider__slide mb-2" : "mb-8"}`}
     >
       <Link href={`/${category}/${slug}`}>
         <a>
