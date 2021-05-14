@@ -65,7 +65,12 @@ export default function ArticleSlider({ name, articles, related }) {
         className={`keen-slider relative ${!related && "pl-4 md:pl-16"}`}
       >
         {articles.map((article) => (
-          <ArticleCard key={article.sys.id} article={article} slider={true} />
+          <ArticleCard
+            key={article.sys.id}
+            article={article}
+            slider={true}
+            related={related}
+          />
         ))}
       </div>
     </section>
