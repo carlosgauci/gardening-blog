@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
+import NavLinks from "./NavLinks";
 
-export default function Footer() {
+export default function Footer({ categories }) {
   const router = useRouter();
   return (
     <footer className="bg-gray-900">
@@ -12,12 +13,7 @@ export default function Footer() {
         {/* Nav section */}
         <section className="mt-6 md:mt-0">
           <nav>
-            <ul>
-              <li>nav item</li>
-              <li>nav item</li>
-              <li>nav item</li>
-              <li>nav item</li>
-            </ul>
+            <NavLinks footer={true} categories={categories} />
           </nav>
         </section>
 

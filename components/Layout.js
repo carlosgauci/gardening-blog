@@ -25,7 +25,7 @@ export default function Layout({ children }) {
       {navOpen && (
         <Navigation setNavOpen={setNavOpen} categories={categories} />
       )}
-      <Footer />
+      <Footer categories={categories} />
     </>
   );
 }
