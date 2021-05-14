@@ -36,7 +36,7 @@ export default function NewsletterForm({ index }) {
           {/* Email input */}
           <input
             type="email"
-            placeholder="your email"
+            placeholder="Your email address..."
             className={`mb-3 rounded-sm px-2 text-gray-900 font-body  ${
               index ? "h-10 w-72" : "h-8"
             }`}

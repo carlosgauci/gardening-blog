@@ -2,6 +2,7 @@ import { createClient } from "contentful";
 import Image from "next/image";
 import ArticleContent from "../../components/ArticleContent";
 import Sidebar from "../../components/Sidebar";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -62,6 +63,11 @@ export async function getStaticProps({ params }) {
 
 export default function PostPage({ article, relatedArticles, categories }) {
   const { image, title } = article.fields;
+
+  // Show more slides on large screens
+  const largeScreen = useMediaQuery(768);
+  const slice = (articles) => articles.slice(0, 3);
+
   return (
     <div className="pt-14 md:pt-20 xl:container xl:max-w-7xl">
       {/* Article image */}
@@ -76,7 +82,12 @@ export default function PostPage({ article, relatedArticles, categories }) {
       </section>
       <section className="md:flex relative">
         {/* Article content */}
-        <ArticleContent article={article} relatedArticles={relatedArticles} />
+        <ArticleContent
+          article={article}
+          relatedArticles={
+            largeScreen ? relatedArticles : slice(relatedArticles)
+          }
+        />
 
         <Sidebar categories={categories} />
       </section>

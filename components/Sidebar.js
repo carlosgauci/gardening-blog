@@ -9,8 +9,8 @@ import NavLinks from "./NavLinks";
 
 export default function Sidebar({ categories }) {
   return (
-    <aside className="w-full md:w-1/3 lg:w-1/4  pl-4 pr-4 xl:pr-0 self-start md:sticky md:top-0">
-      {/* Mailing list */}
+    <aside className="w-full md:w-1/3 lg:w-1/4  pl-4 pr-4 xl:pr-0 self-start md:sticky md:top-28">
+      {/* Newsletter */}
       <section className=" bg-gray-900 text-white rounded px-4 py-8 mb-8 text-center ">
         <h4 className="uppercase tracking-widest font-bold text-white mb-5">
           Newsletter
