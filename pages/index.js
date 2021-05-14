@@ -50,6 +50,7 @@ export async function getStaticProps() {
       farming: farming.items,
       animalHusbandry: animalHusbandry.items,
     },
+    revalidate: 120,
   };
 }
 
