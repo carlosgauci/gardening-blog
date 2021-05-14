@@ -31,7 +31,7 @@ export default function ArticleSlider({ name, articles, related }) {
     if (slider) {
       slider.resize();
     }
-  }, [slider]);
+  }, [slider, articles]);
 
   // Get category for "view all" link
   const category = articles[0].fields.category;

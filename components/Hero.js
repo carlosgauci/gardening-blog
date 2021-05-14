@@ -12,7 +12,7 @@ export default function Hero() {
           quality={50}
           loading="eager"
           priority={true}
-          className="opacity-70"
+          className="opacity-60"
           alt="Pro Gardening banner"
         />
       </div>
