@@ -65,7 +65,7 @@ export default function PostPage({ article, relatedArticles }) {
           src={`https:${image.fields.file.url}`}
           layout="fill"
           objectFit="cover"
-          quality={10}
+          quality={40}
           alt={title}
         />
       </section>

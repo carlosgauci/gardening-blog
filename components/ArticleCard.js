@@ -16,7 +16,7 @@ export default function ArticleCard({ article, slider, featured }) {
             src={`https:${image.fields.file.url}`}
             layout="fill"
             objectFit="cover"
-            quality={10}
+            quality={30}
             className="opacity-80"
             alt={title}
           />

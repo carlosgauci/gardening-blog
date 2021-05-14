@@ -11,6 +11,8 @@ import {
   Pagination,
   connectStateResults,
 } from "react-instantsearch-dom";
+import Link from "next/link";
+import Image from "next/image";
 
 // Algolia client
 const client = algoliasearch(
