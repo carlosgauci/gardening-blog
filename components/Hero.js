@@ -9,7 +9,7 @@ export default function Hero() {
           src="/images/hero.jpg"
           layout="fill"
           objectFit="cover"
-          quality={40}
+          quality={50}
           loading="eager"
           priority={true}
           className="opacity-70"
