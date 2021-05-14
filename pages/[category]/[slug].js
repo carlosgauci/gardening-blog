@@ -76,8 +76,9 @@ export default function PostPage({ article, relatedArticles, categories }) {
           src={`https:${image.fields.file.url}`}
           layout="fill"
           objectFit="cover"
-          quality={40}
+          quality={50}
           alt={title}
+          priority={true}
         />
       </section>
       <section className="md:flex relative">

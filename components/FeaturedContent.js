@@ -22,7 +22,7 @@ export default function FeaturedContent({ articles }) {
           {articles.slice(1).map((article, i) => (
             <div
               key={article.sys.id}
-              className={`w-full h-72 ${i > 2 && "hidden xl:block"}`}
+              className={`w-full h-72 ${i > 1 && "hidden xl:block"}`}
             >
               <ArticleCard article={article} featured={true} />
             </div>

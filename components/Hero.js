@@ -10,7 +10,6 @@ export default function Hero() {
           layout="fill"
           objectFit="cover"
           quality={50}
-          loading="eager"
           priority={true}
           className="opacity-60"
           alt="Pro Gardening banner"
