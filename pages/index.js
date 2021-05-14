@@ -3,6 +3,7 @@ import { createClient } from "contentful";
 import Hero from "../components/Hero";
 import FeaturedContent from "../components/FeaturedContent";
 import ArticleSlider from "../components/ArticleSlider";
+import NewsletterSection from "../components/NewsletterSection";
 import useMediaQuery from "../hooks/useMediaQuery";
 
 // Get featured articles + slider articles from contentful
@@ -84,6 +85,8 @@ export default function Home({
         name={"Animal Husbandry"}
         articles={largeScreen ? animalHusbandry : slice(animalHusbandry)}
       />
+
+      <NewsletterSection index={true} />
     </>
   );
 }
