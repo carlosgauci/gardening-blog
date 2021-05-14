@@ -3,7 +3,7 @@ import { BLOCKS } from "@contentful/rich-text-types";
 import Image from "next/image";
 
 export default function ArticleContent({ article, relatedArticles }) {
-  const { title, articleContent, authorName, authorPhoto } = article.fields;
+  const { title, articleContent, authorName, authorImage } = article.fields;
 
   const date = new Date(article.sys.createdAt).toLocaleDateString("en-GB", {
     year: "numeric",
@@ -19,10 +19,10 @@ export default function ArticleContent({ article, relatedArticles }) {
 
         <div className="flex items-center mb-8 font-semibold text-sm">
           {/* Author image (if it exists) */}
-          {authorPhoto && (
+          {authorImage && (
             <div className="relative rounded-full h-8 w-8 overflow-hidden mr-2">
               <Image
-                src={`https:${authorPhoto.fields.file.url}`}
+                src={`https:${authorImage.fields.file.url}`}
                 layout="fill"
                 objectFit="cover"
                 quality={10}

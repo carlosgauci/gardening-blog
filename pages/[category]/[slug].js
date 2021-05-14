@@ -1,6 +1,7 @@
 import { createClient } from "contentful";
 import Image from "next/image";
 import ArticleContent from "../../components/ArticleContent";
+import Sidebar from "../../components/Sidebar";
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -72,6 +73,8 @@ export default function PostPage({ article, relatedArticles }) {
       <section className="md:flex relative">
         {/* Article content */}
         <ArticleContent article={article} relatedArticles={relatedArticles} />
+
+        <Sidebar />
       </section>
     </div>
   );
