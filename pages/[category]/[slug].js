@@ -79,6 +79,7 @@ export default function PostPage({ article, relatedArticles, categories }) {
           quality={50}
           alt={title}
           priority={true}
+          key={article.fields.slug}
         />
       </section>
       <section className="md:flex relative">
