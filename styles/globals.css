@@ -1,3 +1,69 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Poppins";
+    src: url("/fonts/Poppins/Poppins-Regular.ttf");
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Poppins";
+    src: url("/fonts/Poppins/Poppins-Bold.ttf");
+    font-style: bold;
+    font-weight: 700;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    src: url("/fonts/Montserrat/Montserrat-Regular.ttf");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    src: url("/fonts/Montserrat/Montserrat-SemiBold.ttf");
+    font-style: bold;
+    font-weight: 600;
+    font-display: swap;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading;
+    @apply text-gray-900;
+  }
+
+  h3,
+  h4 {
+    @apply mb-3;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
+  h4 {
+    @apply text-xl;
+  }
+
+  p {
+    @apply font-body;
+    @apply mb-3;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 1px 1px 2px #000;
+  }
+}
