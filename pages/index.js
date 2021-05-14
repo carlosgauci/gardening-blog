@@ -1,7 +1,57 @@
 import Head from "next/head";
+import { createClient } from "contentful";
 import Hero from "../components/Hero";
+import FeaturedContent from "../components/FeaturedContent";
 
-export default function Home() {
+// Get featured articles + slider articles from contentful
+export async function getStaticProps() {
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+  });
+
+  const [featured, gardening, farming, animalHusbandry] = await Promise.all([
+    client.getEntries({
+      content_type: "gardeningArticles",
+      limit: 5,
+      "fields.featured": true,
+    }),
+    client.getEntries({
+      content_type: "gardeningArticles",
+      limit: 7,
+      "fields.category": "gardening",
+      "fields.featured": false,
+    }),
+    client.getEntries({
+      content_type: "gardeningArticles",
+      limit: 7,
+      "fields.category": "farming",
+      "fields.featured": false,
+    }),
+    client.getEntries({
+      content_type: "gardeningArticles",
+      limit: 7,
+      "fields.category": "animal-husbandry",
+      "fields.featured": false,
+    }),
+  ]);
+
+  return {
+    props: {
+      featured: featured.items,
+      gardening: gardening.items,
+      farming: farming.items,
+      animalHusbandry: animalHusbandry.items,
+    },
+  };
+}
+
+export default function Home({
+  featured,
+  gardening,
+  farming,
+  animalHusbandry,
+}) {
   return (
     <>
       <Head>
@@ -10,6 +60,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Hero />
+      <FeaturedContent articles={featured} />
     </>
   );
 }
