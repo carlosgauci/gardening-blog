@@ -43,7 +43,7 @@ export default function ArticleContent({ article, relatedArticles }) {
       </section>
 
       {/* Article content */}
-      <section className="pb-4 mb-8 border-b border-gray-200">
+      <section className="articleSection pb-4 mb-8 border-b border-gray-200">
         {documentToReactComponents(articleContent, renderOptions)}
       </section>
 

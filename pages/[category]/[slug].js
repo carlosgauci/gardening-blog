@@ -73,7 +73,6 @@ export default function PostPage({ article, relatedArticles, categories }) {
           alt={title}
         />
       </section>
-      {console.log(categories)}
       <section className="md:flex relative">
         {/* Article content */}
         <ArticleContent article={article} relatedArticles={relatedArticles} />
