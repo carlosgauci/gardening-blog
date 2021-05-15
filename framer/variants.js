@@ -8,12 +8,12 @@ export const navVariants = {
   enter: {
     x: 0,
     transition: {
-      duration: 0.35,
+      duration: 0.25,
     },
   },
   exit: {
     x: "100%",
-    transition: { duration: 0.35 },
+    transition: { duration: 0.25 },
   },
 };
 
@@ -25,12 +25,12 @@ export const underlayVariants = {
   enter: {
     opacity: 0.7,
     transition: {
-      duration: 0.35,
+      duration: 0.25,
     },
   },
   exit: {
     opacity: 0,
-    transition: { duration: 0.35 },
+    transition: { duration: 0.25 },
   },
 };
 
@@ -46,7 +46,7 @@ export const searchboxVariants = {
     x: "-50%",
     opacity: 1,
     transition: {
-      duration: 0.35,
+      duration: 0.25,
     },
   },
 };

@@ -13,7 +13,7 @@ export default function NavLinks({
         footer
           ? "flex-wrap text-white text-xs gap-x-8 gap-y-4 font-heading tracking-widest"
           : "flex-col h-full font-body"
-      } ${mainNav && "pt-14 md:pt-20 text-2xl font-semibold gap-4"} ${
+      } ${mainNav && "pt-14 md:pt-20 text-xl  gap-4"} ${
         sidebar && "text-md gap-y-2"
       } `}
     >

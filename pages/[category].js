@@ -97,7 +97,7 @@ export default function Category({ articles, category, categories }) {
       />
       <div className="pt-14 md:pt-20  xl:container xl:max-w-7xl">
         {/* Category banner */}
-        <div className="relative w-full h-64 md:h-96 flex items-center justify-center bg-black mb-8 rounded-b-md overflow-hidden">
+        <div className="relative w-full h-64 md:h-96 flex items-center justify-center bg-black mb-8 xl:rounded-b-md overflow-hidden">
           <Image
             src={`https:${image}`}
             layout="fill"
