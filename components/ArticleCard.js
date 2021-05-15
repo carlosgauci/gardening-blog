@@ -1,14 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { cardVariants } from "../framer/variants";
 
 export default function ArticleCard({ article, slider, featured, related }) {
   const { title, image, slug, category, authorName, authorImage } =
     article.fields;
   return (
-    <article
+    <motion.article
       className={`relative bg-black px-3 py-2 rounded shadow overflow-hidden ${
         featured ? "h-full" : "h-60"
       } ${slider ? "keen-slider__slide mb-2" : "mb-8"}`}
+      variants={!featured && !slider && cardVariants}
+      initial="initial"
+      animate="enter"
     >
       <Link href={`/${category}/${slug}`}>
         <a>
@@ -52,6 +57,6 @@ export default function ArticleCard({ article, slider, featured, related }) {
           </div>
         </a>
       </Link>
-    </article>
+    </motion.article>
   );
 }

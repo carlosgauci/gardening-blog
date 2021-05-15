@@ -1,10 +1,17 @@
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { cardVariants } from "../framer/variants";
 
 export default function Hero() {
   return (
     <section className="relative h-72 md:h-hero pt-14 md:pt-20 ">
       {/* Hero bg image */}
-      <div className="absolute inset-x-0 bottom-0 top-14 md:top-20 overflow-hidden -z-1 bg-black">
+      <motion.div
+        className="absolute inset-x-0 bottom-0 top-14 md:top-20 overflow-hidden -z-1 bg-black"
+        variants={cardVariants}
+        initial="initial"
+        animate="heroEnter"
+      >
         <Image
           src="/images/hero.jpg"
           layout="fill"
@@ -14,7 +21,7 @@ export default function Hero() {
           className="opacity-60"
           alt="Pro Gardening banner"
         />
-      </div>
+      </motion.div>
 
       {/* Hero content */}
       <div className="py-8 px-2 h-full flex flex-col items-center justify-center text-white">
