@@ -1,1 +1,3 @@
-A blog made with Next.js, Contentful & Algolia search
+A blog made with Next.js, Tailwind CSS, Contentful & Algolia search
+
+https://gardening.vercel.app/
