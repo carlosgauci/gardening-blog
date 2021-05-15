@@ -72,8 +72,7 @@ export default function Category({ articles, category, categories }) {
           src={`https:${image}`}
           layout="fill"
           objectFit="cover"
-          quality={20}
-          loading="eager"
+          quality={30}
           priority={true}
           className="opacity-70"
           alt={name}

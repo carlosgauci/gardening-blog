@@ -13,6 +13,8 @@ import {
 } from "react-instantsearch-dom";
 import Link from "next/link";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { searchboxVariants } from "../framer/variants";
 
 // Algolia client
 const client = algoliasearch(
@@ -20,9 +22,13 @@ const client = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY
 );
 
-export default function Header({ navOpen, setNavOpen }) {
+export default function Header({
+  navOpen,
+  setNavOpen,
+  searchState,
+  setSearchState,
+}) {
   const router = useRouter();
-  const [searchState, setSearchState] = useState({});
 
   // Toggle nav and clear search state
   const handleNavToggle = () => {
@@ -47,7 +53,7 @@ export default function Header({ navOpen, setNavOpen }) {
       searchState={searchState}
       onSearchStateChange={setSearchState}
     >
-      <header className="fixed z-10 w-full ">
+      <header className="fixed z-20 w-full ">
         <div className="w-full bg-white shadow-sm">
           <section
             className={`h-14 md:h-20  flex items-center justify-between ${
@@ -76,26 +82,27 @@ export default function Header({ navOpen, setNavOpen }) {
           </section>
         </div>
 
-        {/* Search results underlay */}
-        {searchState.query && (
-          <div
-            className="fixed inset-0 bg-black opacity-60 -z-1"
-            onClick={() => setSearchState({ ...searchState, query: "" })}
-          ></div>
-        )}
-
+        {/* Search results box */}
         <Results>
-          <section className="container py-4 max-w-full md:max-w-lg max-h-96 bg-white rounded-b-md shadow-md overflow-y-auto">
-            <p>Showing results for "{searchState.query}".</p>
-            <Hits hitComponent={Article} />
-            <Pagination
-              showFirst={false}
-              showPrevious={false}
-              showNext={false}
-              totalPages={6}
-              className="flex justify-center mt-4"
-            />
-          </section>
+          <AnimatePresence>
+            <motion.section
+              className="fixed left-1/2  container py-4 max-w-full md:max-w-lg max-h-96 bg-white rounded-b-md shadow-md overflow-y-auto"
+              variants={searchboxVariants}
+              initial="initial"
+              animate="enter"
+              exit="exit"
+            >
+              <p>Showing results for "{searchState.query}".</p>
+              <Hits hitComponent={Article} />
+              <Pagination
+                showFirst={false}
+                showPrevious={false}
+                showNext={false}
+                totalPages={6}
+                className="flex justify-center mt-4"
+              />
+            </motion.section>
+          </AnimatePresence>
         </Results>
       </header>
     </InstantSearch>
@@ -112,7 +119,7 @@ const Results = connectStateResults(
       } else {
         return (
           // Show a message if we have a search query and no results were found
-          <div className="container bg-white max-w-full rounded-b-md md:max-w-lg py-2">
+          <div className="fixed left-1/2 transform -translate-x-1/2 container bg-white max-w-full rounded-b-md md:max-w-lg py-2">
             <p>No results found for "{searchState.query}"</p>
           </div>
         );
