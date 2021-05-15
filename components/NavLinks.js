@@ -28,7 +28,7 @@ export default function NavLinks({
       {categories.map((cat) => (
         <li key={cat.slug || cat.fields.slug}>
           <Link href={`/${cat.slug || cat.fields.slug}`}>
-            <a onClick={footer ? undefined : () => setNavOpen(false)}>
+            <a onClick={mainNav ? () => setNavOpen(false) : undefined}>
               {cat.name || cat.fields.name}
             </a>
           </Link>

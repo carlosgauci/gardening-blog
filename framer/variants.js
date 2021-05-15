@@ -49,10 +49,28 @@ export const searchboxVariants = {
       duration: 0.35,
     },
   },
-  exit: {
-    y: -50,
-    x: "-50%",
+};
+
+// Featured content
+export const featuredVariants = {
+  initialFirst: {
+    y: 50,
     opacity: 0,
-    transition: { duration: 0.35 },
+  },
+  enterFirst: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.35,
+    },
+  },
+
+  enterSecond: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.35,
+      delay: 0.2,
+    },
   },
 };

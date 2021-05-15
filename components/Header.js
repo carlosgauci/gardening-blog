@@ -2,7 +2,7 @@ import Logo from "./Logo";
 import { useRouter } from "next/router";
 import { BiMenu } from "react-icons/bi";
 import { IoClose } from "react-icons/io5";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import algoliasearch from "algoliasearch";
 import {
   InstantSearch,
@@ -13,7 +13,7 @@ import {
 } from "react-instantsearch-dom";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { searchboxVariants } from "../framer/variants";
 
 // Algolia client
@@ -84,25 +84,22 @@ export default function Header({
 
         {/* Search results box */}
         <Results>
-          <AnimatePresence>
-            <motion.section
-              className="fixed left-1/2  container py-4 max-w-full md:max-w-lg max-h-96 bg-white rounded-b-md shadow-md overflow-y-auto"
-              variants={searchboxVariants}
-              initial="initial"
-              animate="enter"
-              exit="exit"
-            >
-              <p>Showing results for "{searchState.query}".</p>
-              <Hits hitComponent={Article} />
-              <Pagination
-                showFirst={false}
-                showPrevious={false}
-                showNext={false}
-                totalPages={6}
-                className="flex justify-center mt-4"
-              />
-            </motion.section>
-          </AnimatePresence>
+          <motion.section
+            className="fixed left-1/2  container py-4 max-w-full md:max-w-lg max-h-96 bg-white rounded-b-md shadow-md overflow-y-auto"
+            variants={searchboxVariants}
+            initial="initial"
+            animate="enter"
+          >
+            <p>Showing results for "{searchState.query}".</p>
+            <Hits hitComponent={Article} />
+            <Pagination
+              showFirst={false}
+              showPrevious={false}
+              showNext={false}
+              totalPages={6}
+              className="flex justify-center mt-4"
+            />
+          </motion.section>
         </Results>
       </header>
     </InstantSearch>

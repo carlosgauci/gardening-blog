@@ -1,4 +1,6 @@
 import ArticleCard from "./ArticleCard";
+import { motion } from "framer-motion";
+import { featuredVariants } from "../framer/variants";
 
 export default function FeaturedContent({ articles }) {
   return (
@@ -11,14 +13,24 @@ export default function FeaturedContent({ articles }) {
       {/* Content */}
       <div className="block md:flex">
         {/* Large article (on large screens) */}
-        <section className="w-full h-72 mr-0 mb-4 md:h-featured md:w-1/2 md:mr-4 md:mb-0">
+        <motion.section
+          className="w-full h-72 mr-0 mb-4 md:h-featured md:w-1/2 md:mr-4 md:mb-0"
+          variants={featuredVariants}
+          initial="initialFirst"
+          animate="enterFirst"
+        >
           <div className="w-full h-full">
             <ArticleCard article={articles[0]} featured={true} />
           </div>
-        </section>
+        </motion.section>
 
         {/* Grid articles */}
-        <section className="grid grid-cols-1 xl:grid-cols-2 w-full md:w-1/2 gap-4">
+        <motion.section
+          className="grid grid-cols-1 xl:grid-cols-2 w-full md:w-1/2 gap-4"
+          variants={featuredVariants}
+          initial="initialFirst"
+          animate="enterSecond"
+        >
           {articles.slice(1).map((article, i) => (
             <div
               key={article.sys.id}
@@ -27,7 +39,7 @@ export default function FeaturedContent({ articles }) {
               <ArticleCard article={article} featured={true} />
             </div>
           ))}
-        </section>
+        </motion.section>
       </div>
     </section>
   );
