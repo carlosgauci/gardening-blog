@@ -109,7 +109,7 @@ export default function Category({ articles, category, categories }) {
 
       <section className="md:flex">
         {/* Category content */}
-        <CategoryPage category={category} articles={articles} />
+        {articles && <CategoryPage articles={articles} />}
 
         <Sidebar categories={categories} />
       </section>
