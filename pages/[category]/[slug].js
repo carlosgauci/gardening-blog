@@ -2,6 +2,7 @@ import { createClient } from "contentful";
 import Image from "next/image";
 import ArticleContent from "../../components/ArticleContent";
 import Sidebar from "../../components/Sidebar";
+import Fallback from "../../components/Fallback";
 import useMediaQuery from "../../hooks/useMediaQuery";
 
 const client = createClient({
@@ -23,7 +24,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }
 
@@ -45,23 +46,28 @@ export async function getStaticProps({ params }) {
     }),
   ]);
 
-  // ----IMPLEMENT BETTER WAY FOR RELATED POSTS LATER----
-  //   Filter current article from related
-  const filteredArticles = relatedArticles.items.filter(
-    (item) => item.fields.slug !== article.items[0].fields.slug
-  );
-
   return {
     props: {
       article: article.items[0],
-      relatedArticles: filteredArticles,
+      relatedArticles: relatedArticles.items,
       categories: categories.items,
     },
     revalidate: 120,
   };
 }
 
-export default function PostPage({ article, relatedArticles, categories }) {
+export default function ArticlePage({ article, relatedArticles, categories }) {
+  // Show fallback while we retrieve data if new articles were added
+  if (!article) {
+    return <Fallback />;
+  }
+
+  //   Filter current article from related articles
+  const filteredArticles = relatedArticles.filter(
+    (item) => item.fields.slug !== article.fields.slug
+  );
+
+  // Image & title for current article
   const { image, title } = article.fields;
 
   // Show more slides on large screens
@@ -87,7 +93,7 @@ export default function PostPage({ article, relatedArticles, categories }) {
         <ArticleContent
           article={article}
           relatedArticles={
-            largeScreen ? relatedArticles : slice(relatedArticles)
+            largeScreen ? filteredArticles : slice(filteredArticles)
           }
         />
 
