@@ -3,6 +3,9 @@ import CategoryPage from "../components/CategoryPage";
 import Sidebar from "../components/Sidebar";
 import Fallback from "../components/Fallback";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import Head from "next/head";
+import DefaultErrorPage from "next/error";
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -44,13 +47,6 @@ export async function getStaticProps({ params }) {
     }),
   ]);
 
-  // Return 404 if category doesnt exist
-  if (!category.length) {
-    return {
-      notFound: true,
-    };
-  }
-
   return {
     props: {
       articles: articles.items,
@@ -62,9 +58,22 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Category({ articles, category, categories }) {
+  const router = useRouter();
   // Show fallback while we retrieve data if a new category was added
-  if (!category) {
+  if (router.isFallback) {
     return <Fallback />;
+  }
+
+  // Show 404 if we have no category to retrieve
+  if (!category.length) {
+    return (
+      <>
+        <Head>
+          <meta name="robots" content="noindex"></meta>
+        </Head>
+        <DefaultErrorPage statusCode={404} />
+      </>
+    );
   }
 
   const {

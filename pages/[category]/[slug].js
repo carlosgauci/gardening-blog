@@ -4,6 +4,9 @@ import ArticleContent from "../../components/ArticleContent";
 import Sidebar from "../../components/Sidebar";
 import Fallback from "../../components/Fallback";
 import useMediaQuery from "../../hooks/useMediaQuery";
+import { useRouter } from "next/router";
+import Head from "next/head";
+import DefaultErrorPage from "next/error";
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -46,16 +49,9 @@ export async function getStaticProps({ params }) {
     }),
   ]);
 
-  // Return 404 if article doesnt exist
-  if (!article.length) {
-    return {
-      notFound: true,
-    };
-  }
-
   return {
     props: {
-      article: article.items[0],
+      article: article.items,
       relatedArticles: relatedArticles.items,
       categories: categories.items,
     },
@@ -64,18 +60,31 @@ export async function getStaticProps({ params }) {
 }
 
 export default function ArticlePage({ article, relatedArticles, categories }) {
+  const router = useRouter();
   // Show fallback while we retrieve data if a new article was added
-  if (!article) {
+  if (router.isFallback) {
     return <Fallback />;
+  }
+
+  // Show 404 if we have no article to retrieve
+  if (!article.length) {
+    return (
+      <>
+        <Head>
+          <meta name="robots" content="noindex"></meta>
+        </Head>
+        <DefaultErrorPage statusCode={404} />
+      </>
+    );
   }
 
   //   Filter current article from related articles
   const filteredArticles = relatedArticles.filter(
-    (item) => item.fields.slug !== article.fields.slug
+    (item) => item.fields.slug !== article[0].fields.slug
   );
 
   // Image & title for current article
-  const { image, title } = article.fields;
+  const { image, title } = article[0].fields;
 
   // Show more slides on large screens
   const largeScreen = useMediaQuery(768);
@@ -92,13 +101,13 @@ export default function ArticlePage({ article, relatedArticles, categories }) {
           quality={50}
           alt={title}
           priority={true}
-          key={article.fields.slug}
+          key={article[0].fields.slug}
         />
       </section>
       <section className="md:flex relative">
         {/* Article content */}
         <ArticleContent
-          article={article}
+          article={article[0]}
           relatedArticles={
             largeScreen ? filteredArticles : slice(filteredArticles)
           }
