@@ -46,13 +46,10 @@ export async function getStaticProps({ params }) {
     }),
   ]);
 
-  // Redirect user if the article doesnt exist (instead of fallback)
+  // Return 404 if article doesnt exist
   if (!article.length) {
     return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
+      notFound: true,
     };
   }
 

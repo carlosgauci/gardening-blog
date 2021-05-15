@@ -26,37 +26,35 @@ export async function getStaticPaths() {
   };
 }
 
-// Get articles for category from contentful
 export async function getStaticProps({ params }) {
-  const [articles, categories] = await Promise.all([
+  const [articles, category, categories] = await Promise.all([
+    // Get articles for this category
     client.getEntries({
       content_type: "gardeningArticles",
       "fields.category": params.category,
     }),
+    // Get category
+    client.getEntries({
+      content_type: "gardeningCategories",
+      "fields.slug": params.category,
+    }),
+    // Get all categories for navigation
     client.getEntries({
       content_type: "gardeningCategories",
     }),
   ]);
 
-  // Filter this category from category list
-  const thisCategory = categories.items.filter(
-    (cat) => cat.fields.slug === params.category
-  );
-
-  // Redirect user if the category doesnt exist
-  if (!thisCategory.length) {
+  // Return 404 if category doesnt exist
+  if (!category.length) {
     return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
+      notFound: true,
     };
   }
 
   return {
     props: {
       articles: articles.items,
-      category: thisCategory,
+      category: category.items,
       categories: categories.items,
     },
     revalidate: 120,
