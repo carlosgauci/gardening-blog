@@ -109,7 +109,7 @@ export default function ArticlePage({ article, relatedArticles, categories }) {
       />
       <div className="pt-14 md:pt-20 xl:container xl:max-w-7xl">
         {/* Article image */}
-        <section className="relative w-full mb-8 h-72 md:h-featured xl:rounded-b-md overflow-hidden">
+        <section className="relative w-full mb-8 h-72 md:h-96 xl:rounded-b-md overflow-hidden">
           <Image
             src={`https:${image.fields.file.url}`}
             layout="fill"
