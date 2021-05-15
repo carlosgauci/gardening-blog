@@ -1,6 +1,7 @@
 import { createClient } from "contentful";
 import CategoryPage from "../components/CategoryPage";
 import Sidebar from "../components/Sidebar";
+import Fallback from "../components/Fallback";
 import Image from "next/image";
 
 const client = createClient({
@@ -21,7 +22,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }
 
@@ -42,6 +43,16 @@ export async function getStaticProps({ params }) {
     (cat) => cat.fields.slug === params.category
   );
 
+  // Redirect user if the category doesnt exist
+  if (!thisCategory.length) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       articles: articles.items,
@@ -53,6 +64,11 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Category({ articles, category, categories }) {
+  // Show fallback while we retrieve data if a new category was added
+  if (!category) {
+    return <Fallback />;
+  }
+
   const {
     categoryImage: {
       fields: {

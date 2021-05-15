@@ -46,6 +46,16 @@ export async function getStaticProps({ params }) {
     }),
   ]);
 
+  // Redirect user if the article doesnt exist (instead of fallback)
+  if (!article.length) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       article: article.items[0],
@@ -57,7 +67,7 @@ export async function getStaticProps({ params }) {
 }
 
 export default function ArticlePage({ article, relatedArticles, categories }) {
-  // Show fallback while we retrieve data if new articles were added
+  // Show fallback while we retrieve data if a new article was added
   if (!article) {
     return <Fallback />;
   }
