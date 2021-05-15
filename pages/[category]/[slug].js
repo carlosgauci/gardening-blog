@@ -7,6 +7,7 @@ import useMediaQuery from "../../hooks/useMediaQuery";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import DefaultErrorPage from "next/error";
+import SEO from "../../components/SEO";
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -84,37 +85,53 @@ export default function ArticlePage({ article, relatedArticles, categories }) {
   );
 
   // Image & title for current article
-  const { image, title } = article[0].fields;
+  const { image, title, seoDescription } = article[0].fields;
+
+  // Capitalize article title for SEO title
+  const capitalize = (word) => {
+    return word
+      .toLowerCase()
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
 
   // Show more slides on large screens
   const largeScreen = useMediaQuery(768);
   const slice = (articles) => articles.slice(0, 3);
 
   return (
-    <div className="pt-14 md:pt-20 xl:container xl:max-w-7xl">
-      {/* Article image */}
-      <section className="relative w-full mb-8 h-72 md:h-featured xl:rounded-b-md overflow-hidden">
-        <Image
-          src={`https:${image.fields.file.url}`}
-          layout="fill"
-          objectFit="cover"
-          quality={50}
-          alt={title}
-          priority={true}
-          key={article[0].fields.slug}
-        />
-      </section>
-      <section className="md:flex relative">
-        {/* Article content */}
-        <ArticleContent
-          article={article[0]}
-          relatedArticles={
-            largeScreen ? filteredArticles : slice(filteredArticles)
-          }
-        />
+    <>
+      <SEO
+        title={`${capitalize(title)} | Pro Gardening`}
+        desc={seoDescription}
+        image={`https:${image.fields.file.url}`}
+      />
+      <div className="pt-14 md:pt-20 xl:container xl:max-w-7xl">
+        {/* Article image */}
+        <section className="relative w-full mb-8 h-72 md:h-featured xl:rounded-b-md overflow-hidden">
+          <Image
+            src={`https:${image.fields.file.url}`}
+            layout="fill"
+            objectFit="cover"
+            quality={50}
+            alt={title}
+            priority={true}
+            key={article[0].fields.slug}
+          />
+        </section>
+        <section className="md:flex relative">
+          {/* Article content */}
+          <ArticleContent
+            article={article[0]}
+            relatedArticles={
+              largeScreen ? filteredArticles : slice(filteredArticles)
+            }
+          />
 
-        <Sidebar categories={categories} />
-      </section>
-    </div>
+          <Sidebar categories={categories} />
+        </section>
+      </div>
+    </>
   );
 }

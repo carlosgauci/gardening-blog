@@ -87,6 +87,10 @@ export const cardVariants = {
     },
   },
 
+  heroInitial: {
+    opacity: 0.7,
+  },
+
   heroEnter: {
     opacity: 1,
     transition: {

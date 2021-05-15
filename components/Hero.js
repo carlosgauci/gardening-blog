@@ -9,7 +9,7 @@ export default function Hero() {
       <motion.div
         className="absolute inset-x-0 bottom-0 top-14 md:top-20 overflow-hidden -z-1 bg-black"
         variants={cardVariants}
-        initial="initial"
+        initial="heroInitial"
         animate="heroEnter"
       >
         <Image

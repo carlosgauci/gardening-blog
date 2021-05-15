@@ -1,10 +1,10 @@
-import Head from "next/head";
 import { createClient } from "contentful";
 import Hero from "../components/Hero";
 import FeaturedContent from "../components/FeaturedContent";
 import ArticleSlider from "../components/ArticleSlider";
 import NewsletterSection from "../components/NewsletterSection";
 import useMediaQuery from "../hooks/useMediaQuery";
+import SEO from "../components/SEO";
 
 // Get featured articles + slider articles from contentful
 export async function getStaticProps() {
@@ -66,14 +66,11 @@ export default function Home({
 
   return (
     <>
-      <Head>
-        <title>Gardening Blog by Farmer Joe</title>
-        <meta
-          name="description"
-          content="Browse over 100+ hours of content related to gardening & farming."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <SEO
+        title="Pro Gardening by Farmer Joe"
+        desc="Browse over 100+ hours of content related to gardening & farming."
+        image="/images.hero.jpg"
+      />
 
       <Hero />
 

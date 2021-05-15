@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import DefaultErrorPage from "next/error";
+import SEO from "../components/SEO";
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -84,35 +85,42 @@ export default function Category({ articles, category, categories }) {
     },
   } = category[0].fields;
 
-  const { slug, name } = category[0].fields;
+  const { slug, name, seoDescription } = category[0].fields;
   const formattedCategory = slug.replace(/-/g, " ");
 
   return (
-    <div className="pt-14 md:pt-20  xl:container xl:max-w-7xl">
-      {/* Category banner */}
-      <div className="relative w-full h-64 md:h-96 flex items-center justify-center bg-black mb-8 rounded-b-md overflow-hidden">
-        <Image
-          src={`https:${image}`}
-          layout="fill"
-          objectFit="cover"
-          quality={30}
-          priority={true}
-          className="opacity-70"
-          alt={name}
-        />
+    <>
+      <SEO
+        title={`${name} | Pro Gardening`}
+        desc={seoDescription}
+        image={`https:${image}`}
+      />
+      <div className="pt-14 md:pt-20  xl:container xl:max-w-7xl">
+        {/* Category banner */}
+        <div className="relative w-full h-64 md:h-96 flex items-center justify-center bg-black mb-8 rounded-b-md overflow-hidden">
+          <Image
+            src={`https:${image}`}
+            layout="fill"
+            objectFit="cover"
+            quality={30}
+            priority={true}
+            className="opacity-70"
+            alt={name}
+          />
 
-        {/* Category title */}
-        <h2 className="text-white text-4xl md:text-7xl uppercase text-center tracking-widest font-bold mb-4 relative">
-          {formattedCategory}
-        </h2>
+          {/* Category title */}
+          <h2 className="text-white text-4xl md:text-7xl uppercase text-center tracking-widest font-bold mb-4 relative">
+            {formattedCategory}
+          </h2>
+        </div>
+
+        <section className="md:flex">
+          {/* Category content */}
+          {articles && <CategoryPage articles={articles} />}
+
+          <Sidebar categories={categories} />
+        </section>
       </div>
-
-      <section className="md:flex">
-        {/* Category content */}
-        {articles && <CategoryPage articles={articles} />}
-
-        <Sidebar categories={categories} />
-      </section>
-    </div>
+    </>
   );
 }
