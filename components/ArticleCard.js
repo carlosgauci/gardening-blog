@@ -37,24 +37,28 @@ export default function ArticleCard({ article, slider, featured, related }) {
           </h3>
 
           {/* Author name & image */}
-          <div className="flex items-center font-semibold text-sm text-white absolute bottom-3 left-2">
-            {authorImage && (
-              <div className="relative rounded-full h-8 w-8 overflow-hidden mr-2">
-                <Image
-                  src={`https:${authorImage.fields.file.url}`}
-                  layout="fill"
-                  objectFit="cover"
-                  quality={30}
-                  alt={authorName}
-                />
-              </div>
-            )}
+          {(authorName || authorImage) && (
+            <div className="flex items-center font-semibold text-sm text-white absolute bottom-3 left-2">
+              {authorImage && (
+                <div className="relative rounded-full h-8 w-8 overflow-hidden mr-2">
+                  <Image
+                    src={`https:${authorImage.fields.file.url}`}
+                    layout="fill"
+                    objectFit="cover"
+                    quality={30}
+                    alt={authorName}
+                  />
+                </div>
+              )}
 
-            {/* Author name */}
-            <p className="mr-1 mb-0 font-heading tracking-wider text-shadow">
-              {authorName && `${authorName}`}
-            </p>
-          </div>
+              {/* Author name */}
+              {authorName && (
+                <p className="mr-1 mb-0 font-heading tracking-wider text-shadow">
+                  {authorName}
+                </p>
+              )}
+            </div>
+          )}
         </a>
       </Link>
     </motion.article>

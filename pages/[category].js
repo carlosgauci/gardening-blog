@@ -8,11 +8,13 @@ import Head from "next/head";
 import DefaultErrorPage from "next/error";
 import SEO from "../components/SEO";
 
+// Contentful client
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
 });
 
+// Get category paths
 export async function getStaticPaths() {
   const res = await client.getEntries({
     content_type: "gardeningCategories",
@@ -77,6 +79,7 @@ export default function Category({ articles, category, categories }) {
     );
   }
 
+  // Destructure category
   const {
     categoryImage: {
       fields: {
@@ -84,9 +87,7 @@ export default function Category({ articles, category, categories }) {
       },
     },
   } = category[0].fields;
-
-  const { slug, name, seoDescription } = category[0].fields;
-  const formattedCategory = slug.replace(/-/g, " ");
+  const { name, seoDescription } = category[0].fields;
 
   return (
     <>
@@ -110,7 +111,7 @@ export default function Category({ articles, category, categories }) {
 
           {/* Category title */}
           <h2 className="text-white text-4xl md:text-7xl uppercase text-center tracking-widest font-bold mb-4 relative">
-            {formattedCategory}
+            {name}
           </h2>
         </div>
 

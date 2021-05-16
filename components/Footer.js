@@ -11,17 +11,15 @@ export default function Footer({ categories }) {
         }`}
       >
         {/* Nav section */}
-        <section className="mt-6 md:mt-0">
-          <nav>
-            <NavLinks footer={true} categories={categories} />
-          </nav>
-        </section>
+        <nav className="mt-6 md:mt-0">
+          <NavLinks footer={true} categories={categories} />
+        </nav>
 
         {/* Contact section */}
         <section>
           <ul className="text-white font-heading text-xs tracking-widest text-center md:text-right">
             <li className="mb-0.5">Pro Gardening © Copyright 2021</li>
-            <li>farmerjoe@progardening.com</li>
+            <li>farmerjoe@gardening</li>
           </ul>
         </section>
       </div>

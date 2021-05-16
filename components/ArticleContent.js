@@ -33,9 +33,9 @@ export default function ArticleContent({ article, relatedArticles }) {
           )}
 
           {/* Author name */}
-          <p className="mr-1 mb-0 font-heading">
-            {authorName && `${authorName} -`}
-          </p>
+          {authorName && (
+            <p className="mr-1 mb-0 font-heading">{authorName} -</p>
+          )}
 
           {/* Article date */}
           <p className="mb-0 font-heading">{date}</p>

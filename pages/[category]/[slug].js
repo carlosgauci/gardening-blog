@@ -9,6 +9,7 @@ import Head from "next/head";
 import DefaultErrorPage from "next/error";
 import SEO from "../../components/SEO";
 
+// Contentful client
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
@@ -84,8 +85,8 @@ export default function ArticlePage({ article, relatedArticles, categories }) {
     (item) => item.fields.slug !== article[0].fields.slug
   );
 
-  // Image & title for current article
-  const { image, title, seoDescription } = article[0].fields;
+  // Destructure current article
+  const { image, title, seoDescription, slug } = article[0].fields;
 
   // Capitalize article title for SEO title
   const capitalize = (word) => {
@@ -108,7 +109,7 @@ export default function ArticlePage({ article, relatedArticles, categories }) {
         image={`https:${image.fields.file.url}`}
       />
       <div className="pt-14 md:pt-20 xl:container xl:max-w-7xl">
-        {/* Article image */}
+        {/* Article image/banner */}
         <section className="relative w-full mb-8 h-72 md:h-96 xl:rounded-b-md overflow-hidden">
           <Image
             src={`https:${image.fields.file.url}`}
@@ -117,11 +118,12 @@ export default function ArticlePage({ article, relatedArticles, categories }) {
             quality={50}
             alt={title}
             priority={true}
-            key={article[0].fields.slug}
+            key={slug}
           />
         </section>
+
+        {/* Article content section */}
         <section className="md:flex relative">
-          {/* Article content */}
           <ArticleContent
             article={article[0]}
             relatedArticles={

@@ -26,7 +26,7 @@ function getRequestParams(email) {
   // Mailchimp URL
   const url = `https://${process.env.MAILCHIMP_DC}.api.mailchimp.com/3.0/lists/${process.env.MAILCHIMP_LIST_ID}/members`;
 
-  //   Parameters to send
+  // Parameters to send
   const data = {
     email_address: email,
     status: "subscribed",

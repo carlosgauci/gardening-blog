@@ -20,7 +20,7 @@ export default function NavLinks({
       {!sidebar && (
         <li>
           <Link href="/">
-            <a onClick={footer ? undefined : () => setNavOpen(false)}>Home</a>
+            <a onClick={mainNav ? () => setNavOpen(false) : undefined}>Home</a>
           </Link>
         </li>
       )}

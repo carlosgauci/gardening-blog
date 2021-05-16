@@ -6,20 +6,23 @@ import NewsletterSection from "../components/NewsletterSection";
 import useMediaQuery from "../hooks/useMediaQuery";
 import SEO from "../components/SEO";
 
-// Get featured articles + slider articles from contentful
+// Get articles from Contentful
 export async function getStaticProps() {
+  // Contentful client
   const client = createClient({
     space: process.env.CONTENTFUL_SPACE_ID,
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
   });
 
   const [featured, gardening, farming, animalHusbandry] = await Promise.all([
+    // Latest featured posts
     client.getEntries({
       content_type: "gardeningArticles",
       limit: 5,
       order: "-sys.createdAt",
       "fields.featured": true,
     }),
+    // Latest posts for category article sliders
     client.getEntries({
       content_type: "gardeningArticles",
       limit: 7,
